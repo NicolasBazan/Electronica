@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "80365655322",
+    "firebase_url": "https://proyectoelectronica-b12df.firebaseio.com",
+    "project_id": "proyectoelectronica-b12df",
+    "storage_bucket": "proyectoelectronica-b12df.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:80365655322:android:8b9b011fcb604a2a",
+        "android_client_info": {
+          "package_name": "com.example.nicolas.proyectoelectronica"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "80365655322-edos0hjhe4ni5kkm8fpfqqioj86mgbuv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpZk6uj0G3iu2XEzLS0GSeBwYGmfzeqbA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

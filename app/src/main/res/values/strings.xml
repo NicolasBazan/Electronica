@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">proyectoElectronica</string>
+    <string name="nav_trip">Last trip</string>
+    <string name="nav_month">Month</string>
+    <string name="nav_day">Day</string>
+    <string name="nav_settings">Settings</string>
+    <string name="strEmail">Enter email</string>
+    <string name="strPassword">password</string>
+    <string name="strSignUp">Sign Up</string>
+    <string name="settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
