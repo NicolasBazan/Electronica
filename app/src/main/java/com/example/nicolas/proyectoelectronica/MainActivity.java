@@ -55,12 +55,12 @@ public class MainActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.nav_month:
-                        mMainNav.setItemBackgroundResource(R.color.colorAccent);
+                        mMainNav.setItemBackgroundResource(R.color.colorBlack);
                         setFragment(monthFragment);
                         return true;
 
                     case R.id.nav_day:
-                        mMainNav.setItemBackgroundResource(R.color.colorPrimary);
+                        mMainNav.setItemBackgroundResource(R.color.colorBlack);
                         setFragment(dayFragment);
                         return true;
 
