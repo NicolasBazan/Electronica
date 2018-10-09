@@ -1,0 +1,19 @@
+funcion para lineas en maps
+
+#importar clase polyine
+        
+        
+        Polyline line = mMap.addPolyline(new PolylineOptions()
+                .add(new LatLng(-31.366516, -64.279456), new LatLng(-31.366349, -64.279220))
+                .add(new LatLng(-31.365694, -64.279979), new LatLng(-31.364480, -64.280711))
+                .add(new LatLng(-31.363298, -64.280907), new LatLng(-31.363206, -64.280596))
+                .add(new LatLng(-31.363215, -64.279140), new LatLng(-31.363659, -64.279089))
+
+                .add(new LatLng(-31.364055, -64.277160), new LatLng(-31.363698, -64.276943))
+                .add(new LatLng(-31.363125, -64.276431), new LatLng(-31.362704, -64.276069))
+                .add(new LatLng(-31.362622, -64.276254), new LatLng(-31.362533, -64.276031))
+                .width(5)
+                .color(Color.RED));
+                
+                
+#las nuevas lineas se añaden con un for
