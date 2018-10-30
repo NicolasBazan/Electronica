@@ -2,12 +2,16 @@ package com.example.nicolas.proyectoelectronica;
 
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,13 +26,16 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
     private BottomNavigationView mMainNav;
     private FrameLayout mMainFrame;
     private TripFragment tripFragment;
     private MonthFragment monthFragment;
     private DayFragment dayFragment;
+    private MainFragment mainFragment;
     private FirebaseAuth firebaseAuth;
     private Toolbar toolbar;
+    public TextView info_text;
 
 
     @Override
@@ -36,32 +43,43 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         toolbar = findViewById(R.id.customToolbar);
+        toolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setFragment(mainFragment, "mainFragment");
+            }
+        });
         setSupportActionBar(toolbar);
         mMainFrame=(FrameLayout) findViewById(R.id.main_frame);
         mMainNav=(BottomNavigationView) findViewById(R.id.main_nav);
+        info_text = findViewById(R.id.info_text);
         tripFragment = new TripFragment();
         monthFragment = new MonthFragment();
         dayFragment = new DayFragment();
-        setFragment(tripFragment);
+        mainFragment = new MainFragment();
+
         firebaseAuth = FirebaseAuth.getInstance();
 
+        setFragment(mainFragment, "mainFragment");
         mMainNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
                 switch (item.getItemId()){
+
                     case R.id.nav_trip:
                         mMainNav.setItemBackgroundResource(R.color.colorBlack);
-                        setFragment(tripFragment);
+                        setFragment(tripFragment, "tripFragment");
                         return true;
 
                     case R.id.nav_month:
                         mMainNav.setItemBackgroundResource(R.color.colorBlack);
-                        setFragment(monthFragment);
+                        setFragment(monthFragment, "monthFragment");
                         return true;
 
                     case R.id.nav_day:
                         mMainNav.setItemBackgroundResource(R.color.colorBlack);
-                        setFragment(dayFragment);
+                        setFragment(dayFragment, "dayFragment");
                         return true;
 
                         default:
@@ -73,11 +91,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void setFragment(Fragment fragment) {
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        FragmentTransaction replace = fragmentTransaction.replace(R.id.main_frame, fragment);
-        fragmentTransaction.commit();
-    }
+
+
 
 
     @Override
@@ -95,6 +110,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(this, Settings.class));
         }
         return super.onOptionsItemSelected(item);
+    }
+    private void setFragment(Fragment fragment, String name) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        FragmentTransaction replace = fragmentTransaction.replace(R.id.main_frame, fragment, name);
+        fragmentTransaction.commit();
+
     }
 }
 

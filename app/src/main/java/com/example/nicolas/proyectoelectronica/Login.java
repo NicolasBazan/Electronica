@@ -25,6 +25,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     private EditText txt_email;
     private EditText txt_password;
     private TextView tv_signUp;
+    private TextView tv_resetPassword;
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
 
@@ -43,9 +44,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         txt_email = findViewById(R.id.txt_email);
         txt_password = findViewById(R.id.txt_password);
         tv_signUp = findViewById(R.id.tv_signUp);
+        tv_resetPassword = findViewById(R.id.tv_resetPassword);
         progressDialog = new ProgressDialog(this);
         btn_login.setOnClickListener(this);
         tv_signUp.setOnClickListener(this);
+        tv_resetPassword.setOnClickListener(this);
 
     }
     private void login() {
@@ -75,7 +78,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
                         }else{
                             progressDialog.dismiss();
-                            Toast.makeText(Login.this,"Could not log in. Try again",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Login.this,"Could not log in. Try again",Toast.LENGTH_SHORT).show();
 
                         }
                     }
@@ -90,6 +93,18 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         if (view==tv_signUp){
             finish();
             startActivity(new Intent(this, SignUp.class));
+        }
+        if (view==tv_resetPassword){
+            String email = txt_email.getText().toString().trim();
+            FirebaseAuth.getInstance().sendPasswordResetEmail(email)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(Login.this,"Reset email sent",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
         }
     }
 
