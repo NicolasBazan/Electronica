@@ -4,6 +4,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -34,7 +35,8 @@ public class BluetoothSettings extends AppCompatActivity {
     public ArrayList<BluetoothDevice> mBTDevices = new ArrayList<>();
     private static final String TAG = "BluetoothSettings";
     private int REQUEST_ENABLE_BT=1;
-    private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+    //private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+    private static final UUID MY_UUID = UUID.fromString("8ce255c0-200a-11e0-ac64-0800200c9a66");
     ConnectedThread mConnectedThread;
 
 
@@ -181,14 +183,17 @@ public class BluetoothSettings extends AppCompatActivity {
                 try {
                     bytes = mmInStream.read(buffer);
                     final String incomingMessage = new String(buffer, 0, bytes);
-                    Log.d(TAG, "InputStream: " + incomingMessage);
 
                     runOnUiThread(new Runnable() {
 
                         @Override
                         public void run() {
-                            Toast.makeText(getApplicationContext(),"Message: "+incomingMessage,Toast.LENGTH_SHORT).show();
-
+                            SharedPreferences sharedPreferences = getSharedPreferences("your_preferences", BluetoothSettings.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.clear();
+                            editor.putString("incomingMessage" ,incomingMessage);
+                            editor.commit();
+                            //Log.d(TAG, "InputStream: " + incomingMessage);
                         }
                     });
 
@@ -228,5 +233,10 @@ public class BluetoothSettings extends AppCompatActivity {
         // Start the thread to manage the connection and perform transmissions
         mConnectedThread = new ConnectedThread(mmSocket);
         mConnectedThread.start();
+    }
+    private void share(String incomingMessage) {
+        Intent intent = new Intent(getBaseContext(), MainActivity.class);
+        intent.putExtra("incomingMessage", incomingMessage);
+        startActivity(intent);
     }
 }

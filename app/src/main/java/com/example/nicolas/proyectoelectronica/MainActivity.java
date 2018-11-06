@@ -2,7 +2,9 @@ package com.example.nicolas.proyectoelectronica;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -57,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         monthFragment = new MonthFragment();
         dayFragment = new DayFragment();
         mainFragment = new MainFragment();
-
+        String incomingMessage= getIntent().getStringExtra("incomingMessage");
         firebaseAuth = FirebaseAuth.getInstance();
 
         setFragment(mainFragment, "mainFragment");
@@ -117,5 +119,6 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
 
     }
+
 }
 
