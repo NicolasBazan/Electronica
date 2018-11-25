@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Home</string>
+    <string name="app_name">Best Driver</string>
     <string name="nav_trip">Last trip</string>
     <string name="nav_month">Month</string>
     <string name="nav_day">Day</string>

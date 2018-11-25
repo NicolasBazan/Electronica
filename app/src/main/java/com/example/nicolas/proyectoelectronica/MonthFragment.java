@@ -1,15 +1,30 @@
 package com.example.nicolas.proyectoelectronica;
 
 
+import android.bluetooth.BluetoothSocket;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+import static android.content.ContentValues.TAG;
 
 
 /**
@@ -17,6 +32,8 @@ import com.jjoe64.graphview.series.LineGraphSeries;
  */
 public class MonthFragment extends Fragment  {
     View mView;
+    ConnectedThread mConnectedThread;
+
 
 
     public MonthFragment() {
@@ -56,6 +73,96 @@ public class MonthFragment extends Fragment  {
 
 
         return mView;
+    }
+    private Handler timerHandler = new Handler();
+    private boolean shouldRun = true;
+    private Runnable timerRunnable = new Runnable() {
+        @Override
+        public void run() {
+            if (shouldRun) {
+                /* Put your code here */
+                SharedPreferences sharedPreferences = getContext().getSharedPreferences("your_preferences", getContext().MODE_PRIVATE);
+                String incomingMessage = sharedPreferences.getString("incomingMessage","DEFAULT");
+                Log.d(TAG, "MonthFragment: "+incomingMessage);
+
+                }
+                //run again after 200 milliseconds (1/5 sec)
+                timerHandler.postDelayed(this, 2000);
+        }
+    };
+
+
+//In this example, the timer is started when the activity is loaded, but this need not to be the case
+    @Override
+    public void onResume() {
+        super.onResume();
+        /* ... */
+        timerHandler.postDelayed(timerRunnable, 0);
+    }
+
+    //Stop task when the user quits the activity
+    @Override
+    public void onPause() {
+        super.onPause();
+        /* ... */
+        shouldRun = false;
+        timerHandler.removeCallbacksAndMessages(timerRunnable);
+    }
+
+    private class ConnectedThread extends Thread {
+        private final BluetoothSocket mmSocket;
+        private final InputStream mmInStream;
+        private final OutputStream mmOutStream;
+
+        public ConnectedThread(BluetoothSocket socket) {
+            mmSocket = BluetoothSettings.SocketHandler.getSocket() ;
+            InputStream tmpIn = null;
+            OutputStream tmpOut = null;
+
+            // Get the input and output streams, using temp objects because
+            // member streams are final
+            try {
+                tmpIn = socket.getInputStream();
+                tmpOut = socket.getOutputStream();
+            } catch (IOException e) { }
+
+            mmInStream = tmpIn;
+            mmOutStream = tmpOut;
+        }
+
+        public void run(){
+            byte[] buffer = new byte[1024];  // buffer store for the stream
+
+            int bytes; // bytes returned from read()
+
+            // Keep listening to the InputStream until an exception occurs
+            while (true) {
+                // Read from the InputStream
+                try {
+                    bytes = mmInStream.read(buffer);
+                    final String incomingMessage = new String(buffer, 0, bytes);
+
+                    getActivity().runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("your_preferences", BluetoothSettings.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.clear();
+
+                            editor.putString("incomingMessage" ,incomingMessage);
+                            editor.commit();
+
+                        }
+                    });
+
+
+                } catch (IOException e) {
+                    Log.e(TAG, "write: Error reading Input Stream. " + e.getMessage() );
+                    break;
+                }
+            }
+        }
     }
 
 }

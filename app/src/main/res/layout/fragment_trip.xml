@@ -4,6 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".TripFragment">
+    <include
+        layout="@layout/toolbar"
+        android:id="@+id/customToolbar"/>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -28,23 +31,34 @@
         android:paddingTop="65dp">
 
         <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_km"
+            android:layout_width="234dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="47dp"
-            android:text="Kilometros\nrecorridos" />
+            android:layout_marginBottom="40dp"
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/textView5"
+        <Button
+            android:id="@+id/btn_stop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-            android:layout_alignParentBottom="true"
+            android:layout_alignBaseline="@+id/tv_km"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="71dp"
-            android:text="Puntaje del\nviaje" />
+            android:layout_marginEnd="42dp"
+            android:text="Terminar\nViaje" />
+
+        <Button
+            android:id="@+id/btn_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/btn_stop"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="149dp"
+            android:text="Iniciar\nViaje" />
+
     </RelativeLayout>
+
+
 
 </FrameLayout>

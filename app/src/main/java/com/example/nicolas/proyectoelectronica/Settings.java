@@ -95,15 +95,6 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
                     });
         }
         if (v==bluetooth){
-            String user_id = firebaseAuth.getCurrentUser().getUid();
-            DatabaseReference current_user_db = FirebaseDatabase.getInstance()
-                    .getReference(user_id)
-                    .child("datos");
-            Map newPost = new HashMap();
-            newPost.put("Longitud","0.16118168");
-            newPost.put("Latitud","0.24284298");
-
-            current_user_db.setValue(newPost);
             startActivity(new Intent(this, BluetoothSettings.class));
         }
     }

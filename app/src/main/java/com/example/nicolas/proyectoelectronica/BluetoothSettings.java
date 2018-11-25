@@ -18,11 +18,16 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.Socket;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+
+import im.delight.android.location.SimpleLocation;
+
+import static android.content.ContentValues.TAG;
 
 
 public class BluetoothSettings extends AppCompatActivity {
@@ -35,9 +40,11 @@ public class BluetoothSettings extends AppCompatActivity {
     public ArrayList<BluetoothDevice> mBTDevices = new ArrayList<>();
     private static final String TAG = "BluetoothSettings";
     private int REQUEST_ENABLE_BT=1;
-    //private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-    private static final UUID MY_UUID = UUID.fromString("8ce255c0-200a-11e0-ac64-0800200c9a66");
+    private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+    //private static final UUID MY_UUID = UUID.fromString("8ce255c0-200a-11e0-ac64-0800200c9a66");
     ConnectedThread mConnectedThread;
+    String incomingMessage="";
+
 
 
 
@@ -48,6 +55,7 @@ public class BluetoothSettings extends AppCompatActivity {
         setContentView(R.layout.activity_bluetooth_settings);
         toolbar = findViewById(R.id.customToolbar);
         listDevices = findViewById(R.id.listDevices);
+
         listDevices.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -131,6 +139,7 @@ public class BluetoothSettings extends AppCompatActivity {
                 // Unable to connect; close the socket and get out
                 Log.d(TAG, "connectException: ");
                 Log.d(TAG, String.valueOf(connectException));
+
                 try {
                     mmSocket.close();
                     Log.d(TAG, "closed");
@@ -151,10 +160,14 @@ public class BluetoothSettings extends AppCompatActivity {
             } catch (IOException e) { }
         }
     }
-    private class ConnectedThread extends Thread {
+    class ConnectedThread extends Thread {
         private final BluetoothSocket mmSocket;
         private final InputStream mmInStream;
         private final OutputStream mmOutStream;
+        SimpleLocation location = new SimpleLocation(BluetoothSettings.this); //or context instead of this
+        double latitude = location.getLatitude();
+        double longitude = location.getLongitude();
+        String latlong = latitude+","+longitude;
 
         public ConnectedThread(BluetoothSocket socket) {
             mmSocket = socket;
@@ -173,27 +186,38 @@ public class BluetoothSettings extends AppCompatActivity {
         }
 
         public void run(){
-            byte[] buffer = new byte[1024];  // buffer store for the stream
+            byte[] buffer = new byte[1];  // buffer store for the stream
 
             int bytes; // bytes returned from read()
-
             // Keep listening to the InputStream until an exception occurs
+            String trama= "";
             while (true) {
                 // Read from the InputStream
                 try {
                     bytes = mmInStream.read(buffer);
-                    final String incomingMessage = new String(buffer, 0, bytes);
+                    String tmp= new String(buffer, 0, bytes);
+                    if (tmp.equals("$")){
+                        trama="";
+                    }else {
+                        trama+=tmp;
+                        if (trama.length()==27){
+                            incomingMessage=trama;
+                            trama="";
 
+                        }
+                    }
                     runOnUiThread(new Runnable() {
 
                         @Override
                         public void run() {
                             SharedPreferences sharedPreferences = getSharedPreferences("your_preferences", BluetoothSettings.MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.clear();
-                            editor.putString("incomingMessage" ,incomingMessage);
+                            editor.putString("incomingMessage" , incomingMessage);
                             editor.commit();
-                            //Log.d(TAG, "InputStream: " + incomingMessage);
+
+
+
+
                         }
                     });
 
@@ -239,4 +263,17 @@ public class BluetoothSettings extends AppCompatActivity {
         intent.putExtra("incomingMessage", incomingMessage);
         startActivity(intent);
     }
+
+    public static class SocketHandler {
+        private static BluetoothSocket mmSocket;
+
+        public static synchronized BluetoothSocket getSocket(){
+            return mmSocket;
+        }
+
+        public static synchronized void setSocket(BluetoothSocket socket){
+            SocketHandler.mmSocket = socket;
+        }
+    }
+
 }

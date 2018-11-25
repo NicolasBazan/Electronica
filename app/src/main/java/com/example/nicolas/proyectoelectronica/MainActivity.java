@@ -1,6 +1,7 @@
 package com.example.nicolas.proyectoelectronica;
 
 
+import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     public TextView info_text;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,12 +55,13 @@ public class MainActivity extends AppCompatActivity {
         });
         setSupportActionBar(toolbar);
         mMainFrame=(FrameLayout) findViewById(R.id.main_frame);
-        mMainNav=(BottomNavigationView) findViewById(R.id.main_nav);
+        mMainNav=(BottomNavigationView)findViewById(R.id.main_nav);
         info_text = findViewById(R.id.info_text);
         tripFragment = new TripFragment();
         monthFragment = new MonthFragment();
         dayFragment = new DayFragment();
         mainFragment = new MainFragment();
+
         String incomingMessage= getIntent().getStringExtra("incomingMessage");
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -75,13 +78,13 @@ public class MainActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.nav_month:
-                        mMainNav.setItemBackgroundResource(R.color.colorBlack);
-                        setFragment(monthFragment, "monthFragment");
+                        //mMainNav.setItemBackgroundResource(R.color.colorBlack);
+                        //setFragment(monthFragment, "monthFragment");
                         return true;
 
                     case R.id.nav_day:
-                        mMainNav.setItemBackgroundResource(R.color.colorBlack);
-                        setFragment(dayFragment, "dayFragment");
+                        //mMainNav.setItemBackgroundResource(R.color.colorBlack);
+                        //setFragment(dayFragment, "dayFragment");
                         return true;
 
                         default:
@@ -114,11 +117,13 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
     private void setFragment(Fragment fragment, String name) {
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        FragmentTransaction replace = fragmentTransaction.replace(R.id.main_frame, fragment, name);
-        fragmentTransaction.commit();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_frame, fragment,name)
+                .addToBackStack(null)
+                .commit();
 
     }
+
 
 }
 
