@@ -2,6 +2,7 @@ package com.example.nicolas.proyectoelectronica;
 
 
 import android.bluetooth.BluetoothSocket;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.Bundle;
@@ -42,6 +43,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.gson.Gson;
 import com.google.maps.android.SphericalUtil;
 
 import org.json.JSONObject;
@@ -57,8 +59,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.Executors;
@@ -68,6 +72,7 @@ import java.util.concurrent.TimeUnit;
 import im.delight.android.location.SimpleLocation;
 
 import static android.content.ContentValues.TAG;
+import static android.content.Context.MODE_PRIVATE;
 
 
 /**
@@ -84,6 +89,7 @@ public class TripFragment extends Fragment implements OnMapReadyCallback {
     private Button btn_start;
     private Button btn_end;
     private Boolean onTrip=true;
+    List<Integer> aceleraciones = new ArrayList<Integer>();
 
 
     ArrayList markerPoints = new ArrayList();
@@ -124,7 +130,44 @@ public class TripFragment extends Fragment implements OnMapReadyCallback {
                 Map newPost = new HashMap();
                 newPost.put("Kilometros",distance);
                 newPost.put("Recorrido",markerPoints);
+                newPost.put("Aceleraciones",aceleraciones);
                 current_user_db.setValue(newPost);
+                Log.d(TAG,"ACELEARCIONES: "+ aceleraciones);
+
+
+                int m4000=0;
+                int m6000=0;
+                int m8000=0;
+                int m10000=0;
+                int m12000=0;
+                int m14000=0;
+                for (int i=0;i<aceleraciones.size();i++){
+                    if(aceleraciones.get(i)<=4000){
+                        m4000+=1;
+
+                    }
+                    else if(aceleraciones.get(i)<=6000){
+                        m6000+=1;
+
+                    }
+                    else if(aceleraciones.get(i)<=8000){
+                        m8000+=1;
+
+                    }
+                    else if(aceleraciones.get(i)<=10000){
+                        m10000+=1;
+
+                    }
+                    else if(aceleraciones.get(i)<=12000){
+                        m12000+=1;
+
+                    }
+                    else if(aceleraciones.get(i)<=14000){
+                        m14000+=1;
+
+                    }
+                }
+                aceleracion.aceleracion= m4000+","+m6000+","+m8000+","+m10000+","+m12000+","+m14000;
                 distance=0;
                 markerPoints.clear();
                 tv_km.setText("KM: "+distance);
@@ -193,11 +236,15 @@ public class TripFragment extends Fragment implements OnMapReadyCallback {
                         String hora = mesg[0];
                         String lat = mesg[1];
                         String lon = mesg[2];
-
+                        int ace = Integer.parseInt(mesg[3]);
+                        String alc = mesg[4];
+                        aceleraciones.add(ace);
 
                         Log.d(TAG, "hora: " + hora);
                         Log.d(TAG, "lat: " + lat);
                         Log.d(TAG, "lon: " + lon);
+                        Log.d(TAG, "ace: " + ace);
+                        Log.d(TAG, "alc: " + alc);
 
 
                         LatLng point = new LatLng(Double.valueOf(lat), Double.valueOf(lon));
@@ -295,7 +342,7 @@ public class TripFragment extends Fragment implements OnMapReadyCallback {
 
                         @Override
                         public void run() {
-                            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("your_preferences", BluetoothSettings.MODE_PRIVATE);
+                            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("your_preferences", MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.clear();
 
@@ -342,6 +389,9 @@ public class TripFragment extends Fragment implements OnMapReadyCallback {
 
 
     };
+    public static class aceleracion {
+        public static String aceleracion = "";
+    }
 
 }
 

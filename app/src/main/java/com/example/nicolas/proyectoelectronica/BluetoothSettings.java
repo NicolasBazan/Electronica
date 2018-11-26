@@ -40,8 +40,8 @@ public class BluetoothSettings extends AppCompatActivity {
     public ArrayList<BluetoothDevice> mBTDevices = new ArrayList<>();
     private static final String TAG = "BluetoothSettings";
     private int REQUEST_ENABLE_BT=1;
-    private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-    //private static final UUID MY_UUID = UUID.fromString("8ce255c0-200a-11e0-ac64-0800200c9a66");
+    //private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+    private static final UUID MY_UUID = UUID.fromString("8ce255c0-200a-11e0-ac64-0800200c9a66");
     ConnectedThread mConnectedThread;
     String incomingMessage="";
 
@@ -200,10 +200,12 @@ public class BluetoothSettings extends AppCompatActivity {
                         trama="";
                     }else {
                         trama+=tmp;
-                        if (trama.length()==27){
+                        if (trama.length()==38){
                             incomingMessage=trama;
                             trama="";
 
+                        }else{
+                            Log.d(TAG,"NO TIENE 38");
                         }
                     }
                     runOnUiThread(new Runnable() {
@@ -214,6 +216,7 @@ public class BluetoothSettings extends AppCompatActivity {
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putString("incomingMessage" , incomingMessage);
                             editor.commit();
+                            Log.d(TAG,"incomiingMessage: "+ incomingMessage);
 
 
 

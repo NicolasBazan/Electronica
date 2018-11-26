@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,49 +7,408 @@
     android:orientation="vertical"
     tools:context=".MonthFragment">
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="1000dp"
-        android:layout_weight="1"
-        android:paddingTop="200dp"
-        tools:context=".MonthFragment">
+    <include
+        layout="@layout/toolbar"
+        android:id="@+id/customToolbar"/>
 
-        <!-- TODO: Update
-         blank fragment layout -->
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/simpleTableLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:stretchColumns="1"
+        android:layout_alignParentTop="true"
+        android:layout_below="@+id/customToolbar"> <!-- stretch the second column of the layout-->
 
-        <com.jjoe64.graphview.GraphView
-            android:id="@+id/graph_month"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </FrameLayout>
+        <!-- first row of the table layout-->
+        <TableRow
+
+            android:id="@+id/row04000"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+
+                android:id="@+id/demenos12000a14000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorBlack"
+                android:padding="18dip"
+                android:text="-12001 a -14000"
+                android:textColor="@color/colorWhite"
+                android:textSize="12dp" />
+
+            <TextView
+
+                android:id="@+id/countmenos12000a14000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:padding="18dip"
+                android:text="0"
+                android:textColor="@color/colorBlack"
+                android:textSize="12dp" />
+            <!-- first element of the row-->
 
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:paddingTop="50dp"
-        android:paddingBottom="50dp">
+        </TableRow>
 
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="79dp"
-            android:text="Puntaje del\nmes" />
+        <!-- first row of the table layout-->
+        <TableRow
 
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="64dp"
-            android:text="Promedio\nKilometros" />
-    </RelativeLayout>
+            android:id="@+id/row40006000"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
 
-</LinearLayout>
+            <TextView
+
+                android:id="@+id/demenos10000a-12000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorBlack"
+                android:padding="18dip"
+                android:text="-10001 a -12000"
+                android:textColor="@color/colorWhite"
+                android:textSize="12dp" />
+
+            <TextView
+
+                android:id="@+id/countmenos10000a12000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:padding="18dip"
+                android:text="0"
+                android:textColor="@color/colorBlack"
+                android:textSize="12dp" />
+            <!-- first element of the row-->
+
+
+        </TableRow>
+        <!-- first row of the table layout-->
+        <TableRow
+
+            android:id="@+id/row600080001"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <!-- first element of the row-->
+            <TextView
+
+                android:id="@+id/demenos8000a10000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorBlack"
+                android:padding="18dip"
+                android:text="-8001 a -10000"
+                android:textColor="@color/colorWhite"
+                android:textSize="12dp" />
+
+            <TextView
+
+                android:id="@+id/countmenos8000a10000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:padding="18dip"
+                android:text="0"
+                android:textColor="@color/colorBlack"
+                android:textSize="12dp" />
+
+
+        </TableRow>
+        <!-- first row of the table layout-->
+        <TableRow
+
+            android:id="@+id/row800010000"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <!-- first element of the row-->
+            <TextView
+
+                android:id="@+id/demenos6000a8000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorBlack"
+                android:padding="18dip"
+                android:text="-6001 a -8000"
+                android:textColor="@color/colorWhite"
+                android:textSize="12dp" />
+
+            <TextView
+
+                android:id="@+id/countmenos6000a8000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:padding="18dip"
+                android:text="0"
+                android:textColor="@color/colorBlack"
+                android:textSize="12dp" />
+
+
+        </TableRow>
+        <!-- first row of the table layout-->
+        <TableRow
+
+            android:id="@+id/row1000012000"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <!-- first element of the row-->
+            <TextView
+
+                android:id="@+id/demenos4000a6000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorBlack"
+                android:padding="18dip"
+                android:text="-4001 a -6000"
+                android:textColor="@color/colorWhite"
+                android:textSize="12dp" />
+
+            <TextView
+
+                android:id="@+id/countmenos4000a6000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:padding="18dip"
+                android:text="0"
+                android:textColor="@color/colorBlack"
+                android:textSize="12dp" />
+
+        </TableRow>
+        <!-- first row of the table layout-->
+        <TableRow
+
+            android:id="@+id/row1200014000"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <!-- first element of the row-->
+            <TextView
+
+                android:id="@+id/demenos0a4000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorBlack"
+                android:padding="18dip"
+                android:text="0 a -4000"
+                android:textColor="@color/colorWhite"
+                android:textSize="12dp" />
+
+            <TextView
+
+                android:id="@+id/countmenos0a4000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:padding="18dip"
+                android:text="0"
+                android:textColor="@color/colorBlack"
+                android:textSize="12dp" />
+
+
+        </TableRow>
+    </TableLayout>
+
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/simpleTableLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/simpleTableLayout1"
+        android:stretchColumns="1"
+        android:layout_alignParentLeft="true"> <!-- stretch the second column of the layout-->
+
+        <!-- first row of the table layout-->
+        <TableRow
+
+            android:id="@+id/row04000"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <!-- first element of the row-->
+            <TextView
+
+                android:id="@+id/de0a4000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorBlack"
+                android:padding="18dip"
+                android:text="0 a 4000"
+                android:textColor="@color/colorWhite"
+                android:textSize="12dp" />
+
+            <TextView
+
+                android:id="@+id/count0a4000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:padding="18dip"
+                android:text="0"
+                android:textColor="@color/colorBlack"
+                android:textSize="12dp" />
+
+        </TableRow>
+
+        <!-- first row of the table layout-->
+        <TableRow
+
+            android:id="@+id/row40006000"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <!-- first element of the row-->
+            <TextView
+
+                android:id="@+id/de4000a6000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorBlack"
+                android:padding="18dip"
+                android:text=" 4001 a 6000"
+                android:textColor="@color/colorWhite"
+                android:textSize="12dp" />
+
+            <TextView
+
+                android:id="@+id/count4000a6000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:padding="18dip"
+                android:text="0"
+                android:textColor="@color/colorBlack"
+                android:textSize="12dp" />
+
+        </TableRow>
+        <!-- first row of the table layout-->
+        <TableRow
+
+            android:id="@+id/row60008000"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <!-- first element of the row-->
+            <TextView
+
+                android:id="@+id/de6000a8000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorBlack"
+                android:padding="18dip"
+                android:text=" 6001 a 8000"
+                android:textColor="@color/colorWhite"
+                android:textSize="12dp" />
+
+            <TextView
+
+                android:id="@+id/count6000a8000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:padding="18dip"
+                android:text="0"
+                android:textColor="@color/colorBlack"
+                android:textSize="12dp" />
+
+        </TableRow>
+        <!-- first row of the table layout-->
+        <TableRow
+
+            android:id="@+id/row800010000"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <!-- first element of the row-->
+            <TextView
+
+                android:id="@+id/de8000a10000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorBlack"
+                android:padding="18dip"
+                android:text=" 8001 a 10000"
+                android:textColor="@color/colorWhite"
+                android:textSize="12dp" />
+
+            <TextView
+
+                android:id="@+id/count8000a10000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:padding="18dip"
+                android:text="0"
+                android:textColor="@color/colorBlack"
+                android:textSize="12dp" />
+
+        </TableRow>
+        <!-- first row of the table layout-->
+        <TableRow
+
+            android:id="@+id/row1000012000"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <!-- first element of the row-->
+            <TextView
+
+                android:id="@+id/de10000a12000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorBlack"
+                android:padding="18dip"
+                android:text=" 10001 a 12000"
+                android:textColor="@color/colorWhite"
+                android:textSize="12dp" />
+
+            <TextView
+
+                android:id="@+id/count10000a12000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:padding="18dip"
+                android:text="0"
+                android:textColor="@color/colorBlack"
+                android:textSize="12dp" />
+
+        </TableRow>
+        <!-- first row of the table layout-->
+        <TableRow
+
+            android:id="@+id/row1200014000"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <!-- first element of the row-->
+            <TextView
+
+                android:id="@+id/de12000a14000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorBlack"
+                android:padding="18dip"
+                android:text=" 12001 a 14000"
+                android:textColor="@color/colorWhite"
+                android:textSize="12dp" />
+
+            <TextView
+
+                android:id="@+id/count12000a14000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:padding="18dip"
+                android:text="0"
+                android:textColor="@color/colorBlack"
+                android:textSize="12dp" />
+
+        </TableRow>
+    </TableLayout>
+
+</RelativeLayout>

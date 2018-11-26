@@ -21,7 +21,8 @@
         app:itemBackground="@color/colorBlack"
         app:itemIconTint="@color/nav_item_colors"
         app:itemTextColor="@color/nav_item_colors"
-        app:menu="@menu/nav_items"/>
+        app:menu="@menu/nav_items"
+        android:layout_alignParentLeft="true" />
 
     <FrameLayout
         android:id="@+id/main_frame"
