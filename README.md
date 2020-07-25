@@ -1,5 +1,7 @@
 # Electronica
+UI needs improvement but since it was a few months school project I ran out of time to make it look better.
 
+Here are some screenshot of the app taken by the client itself:
 ![1](https://user-images.githubusercontent.com/14808553/88444546-0c484a80-cdf4-11ea-8c45-0eee30f29f6f.jpeg)
 ![2](https://user-images.githubusercontent.com/14808553/88444545-0bafb400-cdf4-11ea-970c-29a7569ec2fa.jpeg)
 ![3](https://user-images.githubusercontent.com/14808553/88444547-0ce0e100-cdf4-11ea-8462-1ed9637b3c04.jpeg)
